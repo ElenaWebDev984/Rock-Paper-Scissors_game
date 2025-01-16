@@ -29,16 +29,21 @@ h1 {
   height: 50px;
   margin: 10px;
   color: var(--very-dark-blue);
-  background-color: var(--dark-red);
+  background-color: var(--dark-red); 
   background-image: linear-gradient(#fe4c4c, #ff333d);
   border-color: var(--dark-red);
   border-width: 3px;
   border-radius: 15px;
+  transition: 0.2s;
 }
 
 .btn:hover {
   background-image: linear-gradient(#ff4ca5, #f80870);
 }
+
+/* #rock-btn {
+  background-image: assets\images\rock.jpg;
+} */
 
 .rules-container {
   padding: 10px 0;
