@@ -1,38 +1,33 @@
 function getRandomComputerResult() {
-    const options = ["Rock", "Paper", "Scissors"];
-    const randomIndex = Math.floor(Math.random() * options.length);
-    return options[randomIndex];
+  const options = ["Rock", "Paper", "Scissors"];
+  const randomIndex = Math.floor(Math.random() * options.length);
+  return options[randomIndex];
 }
-console.log(getRandomComputerResult());
 
 function hasPlayerWonTheRound(player, computer) {
   return (
     (player === "Rock" && computer === "Scissors") ||
     (player === "Scissors" && computer === "Paper") ||
-    (player === "Paper" && computer === "Rock"));
+    (player === "Paper" && computer === "Rock")
+  );
 }
-console.log(hasPlayerWonTheRound("Rock", "Scissors")); 
-console.log(hasPlayerWonTheRound("Scissors", "Rock"));
 
 let playerScore = 0;
 let computerScore = 0;
- 
+
 function getRoundResults(userOption) {
   const computerResult = getRandomComputerResult();
 
-    if (hasPlayerWonTheRound(userOption, computerResult)) {
-      playerScore++;
-      return `Player wins! ${userOption} beats ${computerResult}`;
-    } else if (computerResult === userOption) {
-      return `It's a tie! Both chose ${userOption}`
-    } else {
-      computerScore++;
-      return `Computer wins! ${computerResult} beats ${userOption}`;
-    }
+  if (hasPlayerWonTheRound(userOption, computerResult)) {
+    playerScore++;
+    return `Player wins! ${userOption} beats ${computerResult}`;
+  } else if (computerResult === userOption) {
+    return `It's a tie! Both chose ${userOption}`;
+  } else {
+    computerScore++;
+    return `Computer wins! ${computerResult} beats ${userOption}`;
+  }
 }
-console.log(getRoundResults("Rock"));
-console.log("Player Score: ", playerScore, "Computer Score: ", computerScore);
-
 
 const playerScoreSpanElement = document.getElementById("player-score");
 const computerScoreSpanElement = document.getElementById("computer-score");
@@ -54,6 +49,42 @@ function showResults(userOption) {
     resetGameBtn.style.display = "block";
     optionsContainer.style.display = "none";
   }
+
+};
+function resetGame() {
+ // Сбрасываем очки игрока и компьютера
+    playerScore = 0;
+    computerScore = 0;
+
+    // Обновляем отображение очков
+    playerScoreSpanElement.innerText = playerScore;
+    computerScoreSpanElement.innerText = computerScore;
+
+    // Скрываем кнопку сброса игры
+    resetGameBtn.style.display = 'none';
+
+    // Показываем контейнер с опциями для новой игры
+    optionsContainer.style.display = 'block';
+
+    // Очищаем сообщения о победителе и результатах раунда
+    winnerMsgElement.innerText = '';
+    roundResultsMsg.innerText = '';
 };
 
-showResults("Rock");
+resetGameBtn.addEventListener("click", resetGame);
+
+const rockBtn = document.getElementById("rock-btn");
+const paperBtn = document.getElementById("paper-btn");
+const scissorsBtn = document.getElementById("scissors-btn");
+
+rockBtn.addEventListener("click", function () {
+  showResults("Rock");
+});
+
+paperBtn.addEventListener("click", function () {
+  showResults("Paper");
+});
+
+scissorsBtn.addEventListener("click", function () {
+  showResults("Scissors");
+});
